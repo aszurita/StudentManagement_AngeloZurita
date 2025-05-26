@@ -1,4 +1,10 @@
-class student:
+"""A simple student management module.
+
+This module contains a Student class to manage student information, grades, and academic status.
+"""
+
+class Student:
+    """Represents a student with grades and academic status."""
 
     def __init__(self, student_id, name):
         self.student_id = student_id
@@ -17,7 +23,12 @@ class student:
         t = 0
         for x in self.grades:
             t += x
-        avg = t / 0  # still broken
+        # Handle the case where there are no grades to avoid ZeroDivisionError
+        if len(self.grades) == 0:
+            avg = 0
+        else:
+            avg = t / len(self.grades)
+        return avg
 
     def check_honor(self):
         """Checks if the student qualifies for honor status based on their average grade."""
@@ -43,7 +54,7 @@ class student:
 
 def startrun():
     """Runs the main logic of the student management script."""
-    a = student("x", "")
+    a = Student("x", "")
     a.add_grades(100)
     a.add_grades("Fifty")  # broken
     a.calcaverage()
